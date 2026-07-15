@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AI Translation Hub</title>
+    <!-- Correct CSS path -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Banner -->
+    <header class="banner d-flex flex-column align-items-center justify-content-center text-center py-5">
+        <h1 class="text-warning">🌍 AI Translation Hub</h1>
+        <p class="text-muted">Convert text into any language instantly</p>
+    </header>
+
+    <!-- Content -->
+    <main class="container mt-4">
+        <div class="card p-3 shadow-sm">
+            <form method="POST" action="/">
+                <div class="mb-3">
+                    <label for="input_text" class="form-label">Your Text</label>
+                    <textarea class="form-control" id="input_text" name="input_text" rows="5" placeholder="Write something..."></textarea>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="from_lang" class="form-label">From</label>
+                        <select class="form-select" id="from_lang" name="from_lang">
+                            <option value="auto">Detect Automatically</option>
+                            {% for name, code in languages.items() %}
+                                <option value="{{ code }}">{{ name.capitalize() }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="to_lang" class="form-label">To</label>
+                        <select class="form-select" id="to_lang" name="to_lang">
+                            {% for name, code in languages.items() %}
+                                <option value="{{ code }}">{{ name.capitalize() }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100">Translate Now</button>
+            </form>
+
+            {% if translated_text %}
+            <div class="mt-4">
+                <h5>Result:</h5>
+                <div class="alert alert-info">{{ translated_text }}</div>
+                <button class="btn btn-outline-secondary" onclick="copyToClipboard('{{ translated_text }}')">Copy</button>
+                <button class="btn btn-outline-success" onclick="playSpeech('{{ translated_text }}', '{{ to_lang }}')">Listen</button>
+            </div>
+            {% endif %}
+        </div>
+    </main>
+
+    <!-- Correct JS path -->
+    <script src="{{ url_for('static', filename='script/script.js') }}"></script>
+</body>
+</html>

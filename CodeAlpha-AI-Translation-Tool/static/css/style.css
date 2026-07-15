@@ -1,0 +1,25 @@
+.banner {
+    height: 220px;
+    background: linear-gradient(120deg, #28a745, #17a2b8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.btn-primary {
+    background: linear-gradient(120deg, #17a2b8, #28a745);
+    color: #fff;
+    border: none;
+    transition: all 0.25s ease-in-out;
+}
+.btn-primary:hover {
+    background: linear-gradient(120deg, #28a745, #17a2b8);
+    transform: translateY(-2px);
+}
+
+.card {
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
